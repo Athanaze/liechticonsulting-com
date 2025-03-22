@@ -334,73 +334,12 @@
             <!-- Sidebar -->
             <div class="oneblock-sidebar">
                 <div class="sidebar-header">
-                    <h2>Documentation this is the stuff i am editing</h2>
+                    <h2>Documentation</h2>
                 </div>
                 <div class="sidebar-categories">
                     <h3>Categories</h3>
-                    <div class="categories-list">
-                        <!-- LLM APIs Category -->
-                        <div class="category">
-                            <button class="category-button">
-                                <span>LLM APIs</span>
-                                <svg class="category-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                            <div class="category-items">
-                                <a href="#gemini-api" class="category-item" data-doc="llm-apis/gemini-api">Gemini API</a>
-                            </div>
-                        </div>
-                        
-                        <!-- Embedded Programming Category -->
-                        <div class="category">
-                            <button class="category-button">
-                                <span>Embedded Programming</span>
-                                <svg class="category-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                            <div class="category-items">
-                                <!-- ESP-IDF Examples Subcategory -->
-                                <div class="subcategory">
-                                    <button class="subcategory-button">
-                                        <span>ESP-IDF Examples</span>
-                                        <svg class="category-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
-                                    <div class="subcategory-items">
-                                        <!-- Peripherals -->
-                                        <div class="subcategory">
-                                            <button class="subcategory-button">
-                                                <span>Peripherals</span>
-                                                <svg class="category-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                                </svg>
-                                            </button>
-                                            <div class="subcategory-items">
-                                                <a href="#gpio" class="category-item" data-doc="embedded-programming/esp-idf-examples/peripherals/gpio">GPIO</a>
-                                                <a href="#uart" class="category-item" data-doc="embedded-programming/esp-idf-examples/peripherals/uart">UART</a>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Storage -->
-                                        <div class="subcategory">
-                                            <button class="subcategory-button">
-                                                <span>Storage</span>
-                                                <svg class="category-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                                </svg>
-                                            </button>
-                                            <div class="subcategory-items">
-                                                <a href="#sd-card" class="category-item" data-doc="embedded-programming/esp-idf-examples/storage/sd_card">SD Card</a>
-                                                <a href="#bluetooth" class="category-item" data-doc="embedded-programming/esp-idf-examples/storage/bluetooth">Bluetooth</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div id="categories-list" class="categories-list">
+                        <!-- JS will dynamically populate this -->
                     </div>
                 </div>
             </div>
@@ -447,6 +386,112 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Define the documentation structure
+            const docStructure = {
+                "LLM APIs": {
+                    items: {
+                        "Gemini API": "llm-apis/gemini-api"
+                    }
+                },
+                "Embedded Programming": {
+                    items: {
+                        "ESP-IDF Examples": {
+                            items: {
+                                "Bluetooth": "embedded-programming/esp-idf-examples/storage/bluetooth",
+                                "Peripherals": {
+                                    items: {
+                                        "GPIO": "embedded-programming/esp-idf-examples/peripherals/gpio",
+                                        "UART": "embedded-programming/esp-idf-examples/peripherals/uart"
+                                    }
+                                },
+                                "Storage": {
+                                    items: {
+                                        "SD Card": "embedded-programming/esp-idf-examples/storage/sd_card",
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            // Define the content map
+            const contentMap = {
+                'llm-apis/gemini-api': {{ (site.GetPage "/oneblock/llm-apis/gemini-api").Content }},
+                'embedded-programming/esp-idf-examples/peripherals/gpio': {{ (site.GetPage "/oneblock/embedded-programming/esp-idf-examples/peripherals/gpio").Content }},
+                'embedded-programming/esp-idf-examples/peripherals/uart': {{ (site.GetPage "/oneblock/embedded-programming/esp-idf-examples/peripherals/uart").Content }},
+                'embedded-programming/esp-idf-examples/storage/sd_card': {{ (site.GetPage "/oneblock/embedded-programming/esp-idf-examples/storage/sd_card").Content }},
+                'embedded-programming/esp-idf-examples/storage/bluetooth': {{ (site.GetPage "/oneblock/embedded-programming/esp-idf-examples/bluetooth").Content }}
+            };
+
+            // Generate the sidebar HTML
+            const categoriesContainer = document.getElementById('categories-list');
+            
+            // Function to build the sidebar HTML recursively
+            function buildSidebar(container, structure, level = 0) {
+                Object.entries(structure).forEach(([name, data]) => {
+                    // Skip the "items" property
+                    if (name === 'items') return;
+                    
+                    // If it's a document (leaf node)
+                    if (typeof data === 'string') {
+                        const itemId = data.split('/').pop();
+                        const itemElement = document.createElement('a');
+                        itemElement.href = `#${itemId}`;
+                        itemElement.className = 'category-item';
+                        itemElement.setAttribute('data-doc', data);
+                        itemElement.textContent = name;
+                        container.appendChild(itemElement);
+                        return;
+                    }
+                    
+                    // It's a category or subcategory
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = level === 0 ? 'category' : 'subcategory';
+                    
+                    // Create the button
+                    const button = document.createElement('button');
+                    button.className = level === 0 ? 'category-button' : 'subcategory-button';
+                    
+                    const span = document.createElement('span');
+                    span.textContent = name;
+                    button.appendChild(span);
+                    
+                    // Create the arrow icon
+                    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                    svg.setAttribute("class", "category-icon");
+                    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+                    svg.setAttribute("width", level === 0 ? "16" : level === 1 ? "14" : "12");
+                    svg.setAttribute("height", level === 0 ? "16" : level === 1 ? "14" : "12");
+                    svg.setAttribute("viewBox", "0 0 20 20");
+                    svg.setAttribute("fill", "currentColor");
+                    
+                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    path.setAttribute("fill-rule", "evenodd");
+                    path.setAttribute("d", "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z");
+                    path.setAttribute("clip-rule", "evenodd");
+                    
+                    svg.appendChild(path);
+                    button.appendChild(svg);
+                    categoryDiv.appendChild(button);
+                    
+                    // Create the items container
+                    const itemsDiv = document.createElement('div');
+                    itemsDiv.className = level === 0 ? 'category-items' : 'subcategory-items';
+                    
+                    // Build nested items recursively
+                    if (data.items) {
+                        buildSidebar(itemsDiv, data.items, level + 1);
+                    }
+                    
+                    categoryDiv.appendChild(itemsDiv);
+                    container.appendChild(categoryDiv);
+                });
+            }
+            
+            // Build the sidebar
+            buildSidebar(categoriesContainer, docStructure);
+
             // Toggle category visibility
             const allButtons = document.querySelectorAll('.category-button, .subcategory-button');
             allButtons.forEach(button => {
@@ -491,15 +536,6 @@
                     
                     // Here we'd normally fetch the content, but for now we'll use placeholders
                     let content = "Loading documentation...";
-                    
-                    // Simple mapping for demonstration purposes
-                    const contentMap = {
-                        'llm-apis/gemini-api': {{ (site.GetPage "/oneblock/llm-apis/gemini-api").Content }},
-                        'embedded-programming/esp-idf-examples/peripherals/gpio': {{ (site.GetPage "/oneblock/embedded-programming/esp-idf-examples/peripherals/gpio").Content }},
-                        'embedded-programming/esp-idf-examples/peripherals/uart': {{ (site.GetPage "/oneblock/embedded-programming/esp-idf-examples/peripherals/uart").Content }},
-                        'embedded-programming/esp-idf-examples/storage/sd_card': {{ (site.GetPage "/oneblock/embedded-programming/esp-idf-examples/storage/sd_card").Content }},
-                        'embedded-programming/esp-idf-examples/bluetooth':  {{ (site.GetPage "/oneblock/embedded-programming/esp-idf-examples/bluetooth").Content }}
-                    };
                     
                     if (contentMap[docPath]) {
                         content = contentMap[docPath];
