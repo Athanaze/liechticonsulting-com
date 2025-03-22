@@ -1,0 +1,32 @@
+baseURL = "https://liechtconsulting.com/"
+languageCode = "en-us"
+title = "Liechti Consulting"
+theme = "HugoTeX"
+
+# Enable robots.txt
+enableRobotsTXT = true
+
+# Enable sitemap
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+
+[params]
+    darkmode = false
+    description = "Expert consulting in machine learning, data science, and mathematical modeling"
+    images = ["images/default-share-image.jpg"]
+    mainSections = ["posts"]
+
+[params.Author]
+    name = "Liechti Consulting"
+
+[params.social]
+    twitter = "https://x.com/liechticonsult"
+    github = "https://github.com/athanaze"
+    linkedin = "https://linkedin.com/in/sacha-liechti-678532305"
+    email = "sacha@liechtconsulting.com"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

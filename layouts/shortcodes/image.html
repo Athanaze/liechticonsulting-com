@@ -1,0 +1,20 @@
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" }}
+{{ $caption := .Get "caption" }}
+{{ $class := .Get "class" | default "img-fluid" }}
+{{ $width := .Get "width" | default "auto" }}
+{{ $lazy := .Get "lazy" | default "true" }}
+
+<figure class="image-figure {{ with .Get "figure-class" }}{{ . }}{{ end }}">
+  <img 
+    src="{{ $src }}" 
+    alt="{{ $alt }}" 
+    class="{{ $class }}" 
+    {{ with .Get "width" }}width="{{ . }}"{{ end }} 
+    {{ with .Get "height" }}height="{{ . }}"{{ end }}
+    {{ if eq $lazy "true" }}loading="lazy"{{ end }}
+  >
+  {{ with $caption }}
+    <figcaption>{{ . | markdownify }}</figcaption>
+  {{ end }}
+</figure> 

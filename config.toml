@@ -1,0 +1,58 @@
+baseURL = "http://localhost:1313/"
+languageCode = "en-us"
+title = "Liechti Consulting"
+theme = "HugoTeX"
+
+# Enable robots.txt
+enableRobotsTXT = true
+
+# Enable sitemap
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[params]
+  description = "Expert consulting in machine learning, data science, and mathematical modeling"
+  author = "Liechti Consulting"
+  math = true  # Enable math rendering globally
+  latex = true  # Enable LaTeX-style typography
+  
+  # SEO Image settings
+  images = ["images/default-share-image.jpg"]
+  
+  # Social media handles for SEO
+  twitter_site = "@liechticonsult"
+  twitter_creator = "@liechticonsult"
+  
+  # OpenGraph settings
+  og_image = "images/default-share-image.jpg"
+  og_locale = "en_US"
+
+[params.social]
+  twitter = "https://twitter.com/liechticonsult"
+  github = "https://github.com/athanaze"
+  linkedin = "https://linkedin.com/in/sacha-liechti-678532305"
+  email = "sacha@liechtconsulting.com"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # Allow raw HTML and prevent escaping of LaTeX delimiters
+  [markup.highlight]
+    style = "github"  # Light theme syntax highlighting
+    lineNos = true
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts"
+    weight = 2
+  [[menu.main]]
+    name = "About"
+    url = "/about"
+    weight = 3 

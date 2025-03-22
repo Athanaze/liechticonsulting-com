@@ -1,0 +1,19 @@
+baseURL = "http://localhost:1313/"
+languageCode = "en-us"
+title = "Liechti Consulting"
+theme = "HugoTeX"
+
+[params]
+    author = "Liechti Consulting"
+    darkmode = false
+
+[params.social]
+    twitter = "https://twitter.com/yourusername"
+    github = "https://github.com/yourusername"
+    linkedin = "https://linkedin.com/in/yourusername"
+    email = "contact@liechtconsulting.com"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # Allow raw HTML and prevent escaping of LaTeX delimiters

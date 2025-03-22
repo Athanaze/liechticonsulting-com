@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="sitemap-page">
+    <h1>Sitemap</h1>
+    
+    <h2>Main Pages</h2>
+    <ul>
+        <li><a href="{{ .Site.BaseURL | absURL }}">Home</a></li>
+        <li><a href="{{ "posts" | absURL }}">Posts</a></li>
+        <li><a href="{{ "about" | absURL }}">About</a></li>
+    </ul>
+    
+    <h2>All Posts</h2>
+    <ul>
+    {{ range where .Site.RegularPages "Section" "posts" }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a> - {{ .Date.Format "January 2, 2006" }}</li>
+    {{ end }}
+    </ul>
+</div>
+{{ end }} 

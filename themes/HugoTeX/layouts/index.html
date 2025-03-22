@@ -1,0 +1,33 @@
+{{ define "main" }}
+<div class="container">
+    <section class="hero">
+        <h1>{{ .Site.Title }}</h1>
+        {{ with .Site.Params.description }}
+        <p class="lead">{{ . }}</p>
+        {{ end }}
+    </section>
+
+    <section class="recent-posts">
+        <h2>Recent Posts</h2>
+        <div class="posts-grid">
+            {{ range first 5 (where .Site.RegularPages "Type" "posts") }}
+            <article class="post-card">
+                <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                <div class="post-meta">
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+                </div>
+                {{ with .Description }}
+                <p class="post-excerpt">{{ . }}</p>
+                {{ end }}
+                <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
+            </article>
+            {{ end }}
+        </div>
+        {{ if gt (len (where .Site.RegularPages "Type" "posts")) 5 }}
+        <div class="see-all">
+            <a href="/posts" class="button">See all posts</a>
+        </div>
+        {{ end }}
+    </section>
+</div>
+{{ end }} 
